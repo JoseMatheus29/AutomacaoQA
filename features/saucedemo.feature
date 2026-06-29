@@ -20,11 +20,11 @@ Funcionalidade: Fluxo de compra no SauceDemo
     Então deve ser exibida a mensagem de erro "<mensagem>"
 
     Exemplos:
-      | usuario           | senha         | mensagem                                                                  |
-      | usuario_invalido  | secret_sauce  | Epic sadface: Username and password do not match any user in this service |
-      | standard_user     | senha_errada  | Epic sadface: Username and password do not match any user in this service |
-      | locked_out_user   | secret_sauce  | Epic sadface: Sorry, this user has been locked out.                       |
-      |                   |               | Epic sadface: Username is required                                        |
+      | usuario          | senha        | mensagem                                                                  |
+      | usuario_invalido | secret_sauce | Epic sadface: Username and password do not match any user in this service |
+      | standard_user    | senha_errada | Epic sadface: Username and password do not match any user in this service |
+      | locked_out_user  | secret_sauce | Epic sadface: Sorry, this user has been locked out.                       |
+      | VAZIO            | VAZIO        | Epic sadface: Username is required                                        |
 
   @positivo @carrinho
   Cenário: Adicionar produto ao carrinho e validar
@@ -46,7 +46,7 @@ Funcionalidade: Fluxo de compra no SauceDemo
     E o usuário adiciona o primeiro produto ao carrinho
     E o usuário acessa o carrinho
     Quando o usuário prossegue para o checkout
-    E o usuário preenche os dados "João", "Silva", "60000-000"
+    E o usuário preenche os dados "Joao", "Silva", "60000-000"
     E o usuário finaliza a compra
     Então deve ser exibida a mensagem de sucesso "Thank you for your order!"
 
