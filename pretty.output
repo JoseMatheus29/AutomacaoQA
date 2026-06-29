@@ -1,0 +1,74 @@
+Funcionalidade: Fluxo de compra no SauceDemo # features/saucedemo.feature:3
+  Como um usuário da loja SauceDemo
+  Quero realizar o fluxo completo de compra
+  Para validar que o sistema funciona corretamente
+  Contexto:   # features/saucedemo.feature:8
+
+  @positivo @login
+  Cenário: Login com credenciais válidas                                  # features/saucedemo.feature:12
+    Dado que o usuário acessa o site do SauceDemo                         # features/steps/steps.py:17
+    Quando o usuário faz login com "standard_user" e senha "secret_sauce" # features/steps/steps.py:37
+    Então o usuário deve ser redirecionado para a página de produtos      # features/steps/steps.py:43
+    E o título da página deve ser "Products"                              # features/steps/steps.py:50
+
+  @negativo @login
+  Esquema do Cenário: Login com credenciais inválidas -- @1.1                                                             # features/saucedemo.feature:24
+    Dado que o usuário acessa o site do SauceDemo                                                                         # features/steps/steps.py:17
+    Quando o usuário faz login com "usuario_invalido" e senha "secret_sauce"                                              # features/steps/steps.py:37
+    Então deve ser exibida a mensagem de erro "Epic sadface: Username and password do not match any user in this service" # features/steps/steps.py:61
+
+  @negativo @login
+  Esquema do Cenário: Login com credenciais inválidas -- @1.2                                                             # features/saucedemo.feature:25
+    Dado que o usuário acessa o site do SauceDemo                                                                         # features/steps/steps.py:17
+    Quando o usuário faz login com "standard_user" e senha "senha_errada"                                                 # features/steps/steps.py:37
+    Então deve ser exibida a mensagem de erro "Epic sadface: Username and password do not match any user in this service" # features/steps/steps.py:61
+
+  @negativo @login
+  Esquema do Cenário: Login com credenciais inválidas -- @1.3                                       # features/saucedemo.feature:26
+    Dado que o usuário acessa o site do SauceDemo                                                   # features/steps/steps.py:17
+    Quando o usuário faz login com "locked_out_user" e senha "secret_sauce"                         # features/steps/steps.py:37
+    Então deve ser exibida a mensagem de erro "Epic sadface: Sorry, this user has been locked out." # features/steps/steps.py:61
+
+  @negativo @login
+  Esquema do Cenário: Login com credenciais inválidas -- @1.4                      # features/saucedemo.feature:27
+    Dado que o usuário acessa o site do SauceDemo                                  # features/steps/steps.py:17
+    Quando o usuário faz login com "" e senha ""                                   # None
+    Então deve ser exibida a mensagem de erro "Epic sadface: Username is required" # None
+
+  @positivo @carrinho
+  Cenário: Adicionar produto ao carrinho e validar                      # features/saucedemo.feature:30
+    Dado que o usuário acessa o site do SauceDemo                       # features/steps/steps.py:17
+    Dado que o usuário está logado com "standard_user" e "secret_sauce" # features/steps/steps.py:23
+    Quando o usuário adiciona o primeiro produto ao carrinho            # features/steps/steps.py:75
+    Então o carrinho deve exibir "1" item                               # features/steps/steps.py:82
+    Quando o usuário acessa o carrinho                                  # features/steps/steps.py:89
+    Então o produto deve estar listado no carrinho                      # features/steps/steps.py:97
+
+  @negativo @carrinho
+  Cenário: Verificar carrinho vazio                                     # features/saucedemo.feature:38
+    Dado que o usuário acessa o site do SauceDemo                       # features/steps/steps.py:17
+    Dado que o usuário está logado com "standard_user" e "secret_sauce" # features/steps/steps.py:23
+    Quando o usuário acessa o carrinho sem adicionar produtos           # features/steps/steps.py:107
+    Então o carrinho deve estar vazio                                   # features/steps/steps.py:114
+
+  @positivo @compra
+  Cenário: Fluxo completo de compra                                          # features/saucedemo.feature:44
+    Dado que o usuário acessa o site do SauceDemo                            # features/steps/steps.py:17
+    Dado que o usuário está logado com "standard_user" e "secret_sauce"      # features/steps/steps.py:23
+    E o usuário adiciona o primeiro produto ao carrinho                      # features/steps/steps.py:75
+    E o usuário acessa o carrinho                                            # features/steps/steps.py:89
+    Quando o usuário prossegue para o checkout                               # features/steps/steps.py:124
+    E o usuário preenche os dados "João", "Silva", "60000-000"               # features/steps/steps.py:131
+    E o usuário finaliza a compra                                            # features/steps/steps.py:143
+    Então deve ser exibida a mensagem de sucesso "Thank you for your order!" # features/steps/steps.py:149
+
+  @negativo @checkout
+  Cenário: Tentar finalizar checkout sem preencher dados obrigatórios                     # features/saucedemo.feature:54
+    Dado que o usuário acessa o site do SauceDemo                                         # features/steps/steps.py:17
+    Dado que o usuário está logado com "standard_user" e "secret_sauce"                   # features/steps/steps.py:23
+    E o usuário adiciona o primeiro produto ao carrinho                                   # features/steps/steps.py:75
+    E o usuário acessa o carrinho                                                         # features/steps/steps.py:89
+    Quando o usuário prossegue para o checkout                                            # features/steps/steps.py:124
+    E o usuário tenta continuar sem preencher os dados                                    # features/steps/steps.py:137
+    Então deve ser exibida a mensagem de erro no checkout "Error: First Name is required" # features/steps/steps.py:158
+

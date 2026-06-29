@@ -1,0 +1,5 @@
+selenium==4.18.1
+behave==1.2.6
+webdriver-manager==4.0.1
+allure-behave==2.13.5
+Pillow==10.2.0
