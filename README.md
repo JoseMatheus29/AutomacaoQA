@@ -2,7 +2,7 @@
 
 Projeto de automação E2E para o site [SauceDemo](https://www.saucedemo.com/).
 
-![QA Automation](https://github.com/SEU_USUARIO/saucedemo-automation/actions/workflows/tests.yml/badge.svg)
+![QA Automation](https://github.com/JoseMatheus29/AutomacaoQA/actions/workflows/tests.yml/badge.svg)
 
 ---
 
